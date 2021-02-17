@@ -83,32 +83,116 @@
       // From the 4 CRUD actions, this is the READ action, and uses the GET http method.
       // The main difference from fetchOne() will be the URL you request from; check
       // the writeup to view the URL pattern for fetch one and fetch all
-      function fetchAll() {
-        // TODO
+      async function fetchAll() {
+        document.getElementById("recordForm").style.display = "none";
+        document.getElementById("recordIDcontainer").style.display = "none";
+        let endpoint = document.getElementById("endpoint");
+        let output = document.getElementById("output");
+        console.log(endpoint.value);
+        let res = await fetch(endpoint.value, {
+          method: 'GET',
+        });
+        if (!res.ok) {
+          output.textContent = res.status;
+        }
+        else {
+          let data = await res.json();
+          console.log(data);
+          output.textContent = JSON.stringify(data);
+        }
       }
 
       // This function should fetch one entry from the given endpoint.
       // From the 4 CRUD actions, this is the READ action, and uses the GET http method.
       // The main difference from fetchAll() will be the URL you request from; check
       // the writeup to view the URL pattern for fetch one and fetch all
-      function fetchOne() {
-        // TODO
+      async function fetchOne() {
+        document.getElementById("recordForm").style.display = "none";
+        document.getElementById("recordIDcontainer").style.display = "none";
+        let id = prompt("Enter record id");
+        let endpoint = document.getElementById("endpoint");
+        let output = document.getElementById("output");
+        let res = await fetch(endpoint.value+"/"+id, {
+          method: 'GET',
+        });
+        if (!res.ok) {
+          output.textContent = res.status;
+        }
+        else {
+          let data = await res.json();
+          console.log(data);
+          output.textContent = JSON.stringify(data);
+        }
       }
 
       // This function should use fetch to create one entry in the given endpoint.
       // From the 4 CRUD actions, this is the CREATE action, and uses the POST http method.
       // The main difference from updateRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function createRecord() {
-        // TODO
+      async function createRecord(arg) {
+        if (arg == "show") {
+          let record_form = document.getElementById("recordForm");
+          record_form.style.display = "block";
+          document.getElementById("recordIDcontainer").style.display = "none";
+        }
+        else {
+          let auth = document.getElementById("author");
+          let titl = document.getElementById("title");
+          let endpoint = document.getElementById("endpoint");
+          let output = document.getElementById("output");
+          let res = await fetch(endpoint.value, {
+            method: 'POST',
+            body: 
+            JSON.stringify({
+              "author" : auth.value,
+              "title" : titl.value
+            }),
+            headers: {'Content-Type': 'application/json'}
+          });
+          if (!res.ok) {
+            output.textContent = res.status;
+          }
+          else {
+            let data = await res.json();
+            console.log(data);
+            output.textContent = JSON.stringify(data);
+          }
+        }
       }
 
       // This function should use fetch to update one existing entry in the given endpoint.
       // From the 4 CRUD actions, this is the UPDATE action, and uses the PUT http method.
       // The main difference from createRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function updateRecord() {
-        // TODO
+      async function updateRecord(arg) {
+        if (arg == "show") {
+          document.getElementById("recordForm").style.display = "block";
+          document.getElementById("recordIDcontainer").style.display = "block";
+        }
+        else {
+          let auth = document.getElementById("author");
+          let titl = document.getElementById("title");
+          let id = document.getElementById("recordID");
+          let endpoint = document.getElementById("endpoint");
+          let output = document.getElementById("output");
+          let res = await fetch(endpoint.value+"/"+id.value, {
+            method: 'PUT',
+            body: 
+            JSON.stringify({
+              "author" : auth.value,
+              "title" : titl.value
+            }),
+            headers: {'Content-Type': 'application/json'}
+          });
+          if (!res.ok) {
+            output.textContent = res.status;
+          }
+          else {
+            let data = await res.json();
+            console.log(data);
+            output.textContent = JSON.stringify(data);
+          }
+        }
       }
 
       // This function should use fetch to delete one existing entry in the given endpoint.
@@ -116,8 +200,24 @@
       // The main difference from fetchOne() will be the HTTP method you use to make your
       // request; check the writeup to view the URL pattern for get one and delete. THERE IS NO 
       // delete all, only delete one.
-      function deleteRecord() {
-        // TODO
+      async function deleteRecord() {
+        document.getElementById("recordForm").style.display = "none";
+        document.getElementById("recordIDcontainer").style.display = "none";
+
+        let id = prompt("Enter record id");
+        let endpoint = document.getElementById("endpoint");
+        let output = document.getElementById("output");
+        let res = await fetch(endpoint.value+"/"+id, {
+          method: 'DELETE',
+        });
+        if (!res.ok) {
+          output.textContent = res.status;
+        }
+        else {
+          let data = await res.json();
+          console.log(data);
+          output.textContent = JSON.stringify(data);
+        }
       }
 
       window.addEventListener('DOMContentLoaded', () => {
