@@ -11,6 +11,11 @@
       "id": 1,
       "body": "some comment",
       "postId": 1
+    },
+    {
+      "author": "GG",
+      "title": "ggg",
+      "id": 2
     }
   ],
   "profile": {

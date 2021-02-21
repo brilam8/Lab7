@@ -94,7 +94,7 @@
             method: 'GET',
           });
           if (!res.ok) {
-            output.textContent = res.status;
+            output.textContent = res.status + ": " + res.statusText;
           }
           else {
             let data = await res.json();
@@ -122,7 +122,7 @@
             method: 'GET',
           });
           if (!res.ok) {
-            output.textContent = res.status;
+            output.textContent = res.status + ": " + res.statusText;
           }
           else {
             let data = await res.json();
@@ -162,7 +162,7 @@
               headers: {'Content-Type': 'application/json'}
             });
             if (!res.ok) {
-              output.textContent = res.status;
+              output.textContent = res.status + ": " + res.statusText;
             }
             else {
               let data = await res.json();
@@ -202,7 +202,7 @@
               headers: {'Content-Type': 'application/json'}
             });
             if (!res.ok) {
-              output.textContent = res.status;
+              output.textContent = res.status + ": " + res.statusText;
             }
             else {
               let data = await res.json();
@@ -233,7 +233,7 @@
             method: 'DELETE',
           });
           if (!res.ok) {
-            output.textContent = res.status;
+            output.textContent = res.status + ": " + res.statusText;
           }
           else {
             let data = await res.json();
